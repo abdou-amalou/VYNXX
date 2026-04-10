@@ -1,309 +1,485 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vynxx</title>
-    <link rel="stylesheet" href="landing-page.css">
-</head>
-<body>
-
-  <!-- nav bar -->
-  <div class="nav-bar">
-      <div class="logo">
-        <img class="nav-logo nav-logo-white" src="../../images/landing-page-pictures/nav-bar-logo.svg" alt="Vynxx logo">
-        <img class="nav-logo nav-logo-black" src="../../images/landing-page-pictures/nav-bar-logo-black.svg" alt="Vynxx logo">
-      </div>
-      <div class="nav-links">
-          <a href="#">Services</a>
-          <a href="#">Work</a>
-          <a href="#">About</a>
-      </div>
-  </div>
-
-  <!-- hero section -->
-  <div class="hero-section">
-
-    <!-- canvas background -->
-    <canvas id="wave-canvas"></canvas>
-
-    <!-- text -->
-    <p class="header">Build better with <span>Vynxx</span></p>
-    <p class="sub-header">
-        Video production, design and web experiences crafted to elevate your brand and drive real results
-    </p>
-    <div class="know">
-      <p>Get To Know Us</p>
-      <?xml version="1.0" encoding="UTF-8"?>
-      <svg class = "arrow" xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="512" height="512"><path d="M24,.5V23.5c0,.28-.22,.5-.5,.5s-.5-.22-.5-.5V.5c0-.28,.22-.5,.5-.5s.5,.22,.5,.5Zm-3.5,11H1.09c.07-.21,.2-.4,.36-.57L5.86,6.35c.19-.2,.19-.52-.01-.71-.2-.19-.51-.19-.71,.01L.73,10.23c-.47,.47-.73,1.1-.73,1.77s.26,1.3,.73,1.76l4.41,4.59c.1,.1,.23,.15,.36,.15s.25-.05,.35-.14c.2-.19,.21-.51,.01-.71L1.44,13.06c-.16-.16-.28-.35-.35-.56,0,0,0,0,0,0H20.5c.28,0,.5-.22,.5-.5s-.22-.5-.5-.5Z"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Why People Trust Vynxx -->
-  <div class="trust-section">
-    <div class="grid-titles-div">
-      <p class = "trust-title">Why People Trust Vynxx</p>
-      <p class = "trust-subtitle">Some simple reasons why Vynxx is the right choice for your brand</p>
-    </div>
-    <div class="trust-grids">
-      <div class="grid">
-        <div class="upper-grid">
-          <img class = "svg-img" src="../../images/landing-page-pictures/road.svg" alt="">
-          <p>Clear Direction</p>
-        </div>
-        <p class = "grid-paragraph">Every project starts with a clear idea, a clear plan, and a real goal. We take the time to understand your brand, your audience, and what you want to achieve, so everything we create moves in the right direction from the very beginning</p>
-      </div>
-      <div class="grid">
-        <div class="upper-grid">
-          <img class = "svg-img" src="../../images/landing-page-pictures/quality.svg" alt="">
-          <p>High quality work</p>
-        </div>
-        <p class = "grid-paragraph">We focus on clean design, strong visuals, and attention to every small detail. From video to design to web, everything is made to look professional, feel modern, and give your brand a strong and consistent image</p>
-      </div>
-      <div class="grid">
-        <div class="upper-grid">
-          <img class = "svg-img" src="../../images/landing-page-pictures/result.svg" alt="">
-          <p>Built for result</p>
-        </div>
-        <p class = "grid-paragraph">Everything we create is designed to do more than just look good. Our goal is to help your brand grow, reach the right people, and make a real impact that brings long-term value to your business</p>
-      </div>
-    </div>
-    <div class="tools-used">
-      <div class="left">
-        <p class = "tools-header">Build with modern tools</p>
-        <p class = "tools-sub-header">From video production to web development , we use the right tools to deliver strong results</p>
-      </div>
-      <div class="right">
-        <img src="../../images/landing-page-pictures/react 1.svg" alt="" >
-        <img src="../../images/landing-page-pictures/after-effect..svg" alt="">
-        <img src="../../images/landing-page-pictures/premier-pro.svg" alt="">
-        <img src="../../images/landing-page-pictures/typescript 1.svg" alt="">
-        <img src="../../images/landing-page-pictures/javascript 1.svg" alt="">
-        <img src="../../images/landing-page-pictures/figma 1.svg" alt="">
-        <img src="../../images/landing-page-pictures/css.svg" alt="">
-        <img src="../../images/landing-page-pictures/html.svg" alt="">
-      </div>
-    </div>
-  </div>
-
-
-  <!-- portfolio -->
-  
-  <div class="portfolio">
-    <div class="up">
-      <p class = "portfolio-heading reveal-item">A closer look at the work we create for our client</p>
-      <p class = "portfolio-subheading reveal-item">Every project starts with an idea and is shaped into something real through creativity, precision, and strong execution. From video production to web development, the focus is on creating work that stands out, connects with people, and helps your brand grow</p>
-    </div>
-    <div class="down">
-      <a class="video-production reveal-item">
-        <p class = "video-production-header">Video production</p>
-        <p class = "video-production-subheader">High-quality videos created to capture attention, tell your story, and help your brand connect with the right audience in a powerful and engaging way</p>
-      </a>
-      <a class="web-development reveal-item">
-        <p class = "web-development-header">Web development</p>
-        <p class = "web-development-subheader">Modern and responsive websites built to deliver smooth user experiences, reflect your brand identity, and support your business growth with reliable performance</p>
-      </a>
-    </div>
-  </div>
-
-<script>
-const canvas = document.getElementById("wave-canvas");
-const heroSection = document.querySelector(".hero-section");
-const ctx = canvas.getContext("2d", { alpha: false, desynchronized: true });
-const bufferCanvas = document.createElement("canvas");
-const bufferCtx = bufferCanvas.getContext("2d", { alpha: false });
-let width, height, imageData, data;
-let isVisible = true;
-let frameId = null;
-let lastFrameTime = 0;
-
-const targetFPS = 30;
-const frameInterval = 1000 / targetFPS;
-const qualityScale = (() => {
-  const lowPowerDevice =
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-    (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
-  return lowPowerDevice ? 4 : 3;
-})();
-
-function clamp01(value) {
-  return Math.max(0, Math.min(1, value));
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'inter',sans-serif;
 }
 
-function resizeCanvas() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-  canvas.width = Math.floor(window.innerWidth * dpr);
-  canvas.height = Math.floor(window.innerHeight * dpr);
-  canvas.style.width = `${window.innerWidth}px`;
-  canvas.style.height = `${window.innerHeight}px`;
-
-  width = Math.max(1, Math.floor(canvas.width / qualityScale));
-  height = Math.max(1, Math.floor(canvas.height / qualityScale));
-  bufferCanvas.width = width;
-  bufferCanvas.height = height;
-
-  imageData = bufferCtx.createImageData(width, height);
-  data = imageData.data;
-}
-window.addEventListener("resize", resizeCanvas);
-resizeCanvas();
-
-const startTime = Date.now();
-const SIN_TABLE = new Float32Array(1024);
-const COS_TABLE = new Float32Array(1024);
-for (let i = 0; i < 1024; i++) {
-  const angle = (i / 1024) * Math.PI * 2;
-  SIN_TABLE[i] = Math.sin(angle);
-  COS_TABLE[i] = Math.cos(angle);
-}
-function fastSin(x) {
-  const index = Math.floor(((x % (Math.PI * 2)) / (Math.PI * 2)) * 1024) & 1023;
-  return SIN_TABLE[index];
-}
-function fastCos(x) {
-  const index = Math.floor(((x % (Math.PI * 2)) / (Math.PI * 2)) * 1024) & 1023;
-  return COS_TABLE[index];
+body{
+    width:100%;
+    display : flex;
+    flex-direction:column;
+    height : 10000px;
+    background-color: #090909;
+    gap : 40px;
+    align-items: center;
 }
 
-function render() {
-  if (!isVisible || document.hidden) {
-    frameId = requestAnimationFrame(render);
-    return;
-  }
+/* NAVBAR */
+.nav-bar{
+    backdrop-filter: blur(6px);
+    padding:20px;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    z-index:10;
+}
+.nav-links{
+    display: flex;
+    justify-content: center;
+    width :86%;
+}
 
-  const now = performance.now();
-  if (now - lastFrameTime < frameInterval) {
-    frameId = requestAnimationFrame(render);
-    return;
-  }
-  lastFrameTime = now;
+.logo{
+    position: relative;
+}
 
-  const time = (Date.now() - startTime) * 0.001;
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      const u_x = (2 * x - width) / height;
-      const u_y = (2 * y - height) / height;
-      let a = 0;
-      let d = 0;
-      for (let i = 0; i < 2; i++) {
-        a += fastCos(i - d + time * 0.5 - a * u_x);
-        d += fastSin(i * u_y + a);
-      }
-      const wave = (fastSin(a) + fastCos(d)) * 0.5;
-      const intensity = 0.3 + 0.4 * wave;
-      const baseVal = 0.1 + 0.15 * fastCos(u_x + u_y + time * 0.3);
-      const warmAccent = 0.2 * fastSin(a * 1.5 + time * 0.2);
-      const redAccent = 0.15 * fastCos(d * 2 + time * 0.1);
-      const r = clamp01(baseVal + warmAccent * 1.4 + redAccent * 1.2) * intensity;
-      const g = clamp01(baseVal * 0.4 + warmAccent * 0.25) * intensity;
-      const b = clamp01(baseVal * 0.1) * intensity;
-      const index = (y * width + x) * 4;
-      data[index] = r * 255;
-      data[index + 1] = g * 255;
-      data[index + 2] = b * 255;
-      data[index + 3] = 255;
+.logo .nav-logo{
+    display: block;
+    transition: opacity 320ms ease;
+}
+
+.logo .nav-logo-black{
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-bar.use-dark-logo .nav-logo-white{
+    opacity: 0;
+}
+
+.nav-bar.use-dark-logo .nav-logo-black{
+    opacity: 1;
+}
+
+.nav-bar a{
+    color:white;
+    text-decoration:none;
+    position:relative;
+    display:inline-block;
+    padding-bottom:4px;
+    transition:color 0.2s ;
+}
+
+.nav-bar a:hover{
+    color:#FF410D;
+}
+
+.nav-bar a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:100%;
+    height:2px;
+    background-color:#FF410D;
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform 260ms ease;
+}
+
+.nav-bar a:hover::after{
+    transform:scaleX(1);
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
+}
+
+/* HERO */
+.hero-section{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+    background:#181818;
+}
+.hero-section span{
+    color : #FF410D
+}
+
+/* CANVAS */
+#wave-canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+}
+
+/* OVERLAY */
+.hero-section::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    z-index:1;
+}
+
+/* TEXT */
+.header{
+    z-index:2;
+    font-size:550%;
+    font-weight:600;
+    width : 100%;
+    background:linear-gradient(to right,white,#a7a7a7);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-align:center;
+    letter-spacing : -7px;
+}
+
+.sub-header{
+    z-index:2;
+    font-size:100%;
+    color:#cfcfcf;
+    text-align:center;
+    width : 40%;
+    font-weight : 600;
+    letter-spacing : -1px;
+}
+.know{
+    display: flex;
+    gap : 10px;
+    align-items: center;
+    justify-content: center;
+    z-index:2;
+    margin-top:20px;
+    background : linear-gradient(#FF410D,#e53200);
+    color: #f4f4f4;
+    font-weight:700;
+    letter-spacing : -1.5px;
+    word-spacing : 2px;
+    border-radius:500px;
+    font-size : 65%;
+    padding : 10px 15px;
+    cursor:pointer;
+    transition: all 0.5s;
+}
+.arrow{
+    width : 15px;
+    height : 15px;
+    fill : white;
+    overflow: visible;
+}
+.know:hover{
+    box-shadow: 0px 0px 21px #d52f0189;
+    transform : scale(106%);
+
+}
+.trust-section{
+    display : flex;
+    flex-direction : column;
+    gap : 20px;
+    width : 100%;
+    padding : 40px 0px;
+    background-image : url("../../images/landing-page-pictures/background\ of\ trust.svg");
+    background-size : cover;
+    background-position : center;
+    background-repeat : no-repeat;
+    align-items: center;
+    max-width : 1520px;
+}
+.trust-title{
+    color : white;
+    font-size : 300%;
+    letter-spacing : -2px;
+    font-weight : 700;
+    margin-bottom : 0px;
+    width : 100%;
+    text-align: left;
+}
+.trust-subtitle{
+    color : #e53200;
+    font-weight : 600;
+    letter-spacing : -1px;
+    word-spacing: 2px;
+    opacity : 60%;
+    margin-top : 0px;
+}
+.trust-grids{
+    max-width : 1519px;
+    color : white;
+    display : grid;
+    grid-template-columns: 30% 30% 30%;
+    justify-content: space-between;
+    padding : 0px 40px;
+}
+.upper-grid{
+    display: flex;
+    align-items: center;
+    gap : 15px;
+    font-size : 170%;
+    font-weight : 600;
+    letter-spacing : -2px;
+}
+.svg-img{
+    padding : 13px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius : 13px;
+    border-top : solid 1px rgba(255, 255, 255, 0.228);
+    border-bottom : solid 1px rgba(255, 255, 255, 0.228);
+}
+.grid{
+    display: flex;
+    flex-direction: column;
+    gap : 208px;
+    background-color: rgba(255, 80, 32, 0.2);
+    padding : 28px;
+    border-radius: 40px;
+    border-top : solid 1px rgba(255, 255, 255, 0.228);
+    border-bottom : solid 1px rgba(255, 255, 255, 0.228);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(28px);
+    transition: opacity 1000ms ease, transform 1000ms ease, filter 1000ms ease, box-shadow 300ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+}
+.grid.is-visible{
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+}
+.grid:hover{
+    box-shadow: 0px 0px 21px #ff4a1822;
+    transform : scale(102%);
+    cursor : default;
+}
+.grid-titles-div{
+    padding : 0px 40px;
+    width : 100%;
+}
+.grid-paragraph{
+    font-weight: 600;
+    opacity : 50%;
+    font-size : 90%;
+}
+.tools-used{
+    display : flex;
+    gap : 20px;
+    align-items: center;
+    justify-content: space-between;
+    width : 100%;
+    padding : 0px 50px;
+}
+.tools-used .left{
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    color : white;
+    align-items: flex-start;
+}
+.tools-header{
+    font-size : 300%;
+    letter-spacing : -2px;
+    font-weight : 700;
+    margin-bottom : 0px;
+}
+.tools-sub-header{
+    font-weight : 400;
+    letter-spacing : -1px;
+    word-spacing : 2px;
+    opacity : 54%;
+    margin-top : 5px;
+    width : 77%;
+}
+.trust-section .right{
+    display : flex;
+    gap : 7px;
+    align-items: center;
+    border-radius : 19px;
+    flex-wrap: wrap;
+    width : 20.5%;
+    padding : 14px 30px;
+    background-color: rgba(255, 255, 255, 0.015);
+    border-top : solid 1px rgba(255, 255, 255, 0.228);
+    border-bottom : solid 1px rgba(255, 255, 255, 0.228);
+    backdrop-filter: blur(5px);
+}
+.portfolio{
+    display: flex;
+    background: radial-gradient(50% 50% at 50% 50%, #FFEDE4 0%, #FFF 100%);
+    border-radius : 20px;
+    padding : 120px;
+    flex-direction: column;
+    gap : 120px;
+    margin-top : -40px;
+}
+.portfolio .up{
+    display: flex;
+    flex-direction: column;
+    width : 60%;
+    gap : 60px;
+    
+}
+.portfolio-heading{
+    font-size : 340%;
+    letter-spacing : -2px;
+    font-weight : 700;
+    letter-spacing: -4.5px;
+    word-spacing: 4px;
+    background: linear-gradient(90deg, #FF410D 0%, #FF8665 49.41%, #FF724B 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.portfolio-subheading{
+    color: #1F1F1F;
+    font-family: 'Inter';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -2.16px;
+}
+.portfolio .reveal-item{
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(28px);
+    transition: opacity 1000ms ease, transform 1000ms ease, filter 1000ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+}
+
+.portfolio .reveal-item.is-visible{
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+}
+
+.portfolio .down{
+    display: flex;
+    gap : 90px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.video-production , .web-development, .vid-prod, .web-dev{
+    display: flex;
+    width: 434px;
+    padding: 43px 19px;
+    flex-direction: column;
+    gap: 40px;
+    border-radius: 6px;
+    border: 2px solid rgba(60, 60, 60, 0.75);
+    transition: transform 0.5s, border-color 0.5s, box-shadow 0.5s, background-color 0.5s;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+    scale: 1;
+}
+
+.portfolio .video-production.reveal-item,
+.portfolio .web-development.reveal-item,
+.portfolio .vid-prod.reveal-item,
+.portfolio .web-dev.reveal-item{
+    transition:
+        opacity 1000ms ease var(--reveal-delay, 0ms),
+        filter 1000ms ease var(--reveal-delay, 0ms),
+        transform 1000ms ease var(--reveal-delay, 0ms),
+        scale 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease,
+        background-color 0.5s ease;
+}
+
+.video-production::before,
+.web-development::before,
+.vid-prod::before,
+.web-dev::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #FF410D 0%, #FF8665 49.41%, #FF724B 100%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.video-production > *,
+.web-development > *,
+.vid-prod > *,
+.web-dev > *{
+    position: relative;
+    z-index: 1;
+}
+.portfolio .video-production:hover,
+.portfolio .web-development:hover,
+.portfolio .vid-prod:hover,
+.portfolio .web-dev:hover{
+    border: 2px solid transparent;
+    box-shadow: 0px 0px 21px #ff4a1822;
+    scale: 1.04;
+    cursor : pointer;
+}
+
+.video-production:hover::before,
+.web-development:hover::before,
+.vid-prod:hover::before,
+.web-dev:hover::before{
+    opacity: 1;
+}
+.video-production:hover p, .web-development:hover p, .vid-prod:hover p, .web-dev:hover p{
+    color : white;
+}
+.video-production-header , .web-development-header{
+    color: #FF6C1D;
+    font-family: 'Inter';
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -1.8px;
+}
+.video-production-subheader , .web-development-subheader{
+    color : #1F1F1F;
+    font-family: 'Inter';
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -1px;
+    word-spacing : 1px;
+    font-size: 90%;
+    color: #212121;
+}
+@media (max-width : 1060px){
+    .sub-header{
+        z-index:2;
+        font-size:100%;
+        color:#cfcfcf;
+        text-align:center;
+        width : 40%;
+        font-weight : 600;
+        letter-spacing : -1px;
+        width : 80%;
     }
-  }
-  bufferCtx.putImageData(imageData, 0, 0);
-  ctx.imageSmoothingEnabled = true;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(bufferCanvas, 0, 0, canvas.width, canvas.height);
-
-  frameId = requestAnimationFrame(render);
+    .header{
+        z-index:2;
+        font-size:450%;
+        font-weight:600;
+        width : 100%;
+        background:linear-gradient(to right,white,#a7a7a7);
+        -webkit-background-clip:text;
+        background-clip:text;
+        color:transparent;
+        text-align:center;
+        letter-spacing : -7px;
+    }
+    .hero-section{
+        padding : 15px;
+    }
 }
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    isVisible = entries[0].isIntersecting;
-  },
-  { threshold: 0.02 }
-);
-
-if (heroSection) {
-  observer.observe(heroSection);
-}
-
-const trustSection = document.querySelector(".trust-grids");
-const trustCards = document.querySelectorAll(".trust-grids .grid");
-const portfolioSection = document.querySelector(".portfolio");
-const navBar = document.querySelector(".nav-bar");
-const navLogo = document.querySelector(".logo");
-
-trustCards.forEach((card, index) => {
-  card.style.setProperty("--reveal-delay", `${index * 130}ms`);
-});
-
-if (trustSection && trustCards.length > 0) {
-  const gridsObserver = new IntersectionObserver(
-    (entries, revealObserver) => {
-      if (!entries[0].isIntersecting) {
-        return;
-      }
-
-      trustCards.forEach((card) => {
-        card.classList.add("is-visible");
-      });
-      revealObserver.unobserve(trustSection);
-    },
-    { threshold: 0.22 }
-  );
-
-  gridsObserver.observe(trustSection);
-}
-
-if (portfolioSection && navBar && navLogo) {
-  const updateNavLogoTheme = () => {
-    const portfolioRect = portfolioSection.getBoundingClientRect();
-    const logoRect = navLogo.getBoundingClientRect();
-    const logoTriggerY = logoRect.top + logoRect.height / 2;
-    const useDarkLogo =
-      portfolioRect.top <= logoTriggerY && portfolioRect.bottom > logoTriggerY;
-
-    navBar.classList.toggle("use-dark-logo", useDarkLogo);
-  };
-
-  updateNavLogoTheme();
-  window.addEventListener("scroll", updateNavLogoTheme, { passive: true });
-  window.addEventListener("resize", updateNavLogoTheme);
-}
-
-const portfolioRevealItems = document.querySelectorAll(
-  ".portfolio .portfolio-heading, .portfolio .portfolio-subheading, .portfolio .video-production, .portfolio .web-development"
-);
-
-portfolioRevealItems.forEach((item, index) => {
-  item.style.setProperty("--reveal-delay", `${index * 130}ms`);
-});
-
-if (portfolioRevealItems.length > 0) {
-  const portfolioObserver = new IntersectionObserver(
-    (entries, revealObserver) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) {
-          return;
-        }
-
-        entry.target.classList.add("is-visible");
-        revealObserver.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.2 }
-  );
-
-  portfolioRevealItems.forEach((item) => {
-    portfolioObserver.observe(item);
-  });
-}
-
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) {
-    lastFrameTime = 0;
-  }
-});
-
-frameId = requestAnimationFrame(render);
-</script>
-
-</body>
-</html>
