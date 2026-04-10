@@ -293,6 +293,7 @@ body{
     padding : 120px;
     flex-direction: column;
     gap : 120px;
+    margin-top : -40px;
 }
 .portfolio .up{
     display: flex;
@@ -321,6 +322,21 @@ body{
     line-height: normal;
     letter-spacing: -2.16px;
 }
+.portfolio .reveal-item{
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(28px);
+    transition: opacity 1000ms ease, transform 1000ms ease, filter 1000ms ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+}
+
+.portfolio .reveal-item.is-visible{
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+}
+
 .portfolio .down{
     display: flex;
     gap : 90px;

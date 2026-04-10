@@ -2,15 +2,15 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/frontend/pages/landing-page/index.html"
+      "destination": "/pages/landing-page/index.html"
     },
     {
       "source": "/landing-page.css",
-      "destination": "/frontend/pages/landing-page/landing-page.css"
+      "destination": "/pages/landing-page/landing-page.css"
     },
     {
       "source": "/images/(.*)",
-      "destination": "/frontend/images/$1"
+      "destination": "/images/$1"
     }
   ]
 }

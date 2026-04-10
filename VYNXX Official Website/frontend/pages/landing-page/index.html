@@ -91,15 +91,15 @@
   
   <div class="portfolio">
     <div class="up">
-      <p class = "portfolio-heading">A closer look at the work we create for our client</p>
-      <p class = "portfolio-subheading">Every project starts with an idea and is shaped into something real through creativity, precision, and strong execution. From video production to web development, the focus is on creating work that stands out, connects with people, and helps your brand grow</p>
+      <p class = "portfolio-heading reveal-item">A closer look at the work we create for our client</p>
+      <p class = "portfolio-subheading reveal-item">Every project starts with an idea and is shaped into something real through creativity, precision, and strong execution. From video production to web development, the focus is on creating work that stands out, connects with people, and helps your brand grow</p>
     </div>
     <div class="down">
-      <a class="video-production">
+      <a class="video-production reveal-item">
         <p class = "video-production-header">Video production</p>
         <p class = "video-production-subheader">High-quality videos created to capture attention, tell your story, and help your brand connect with the right audience in a powerful and engaging way</p>
       </a>
-      <a class="web-development">
+      <a class="web-development reveal-item">
         <p class = "web-development-header">Web development</p>
         <p class = "web-development-subheader">Modern and responsive websites built to deliver smooth user experiences, reflect your brand identity, and support your business growth with reliable performance</p>
       </a>
@@ -246,6 +246,34 @@ if (trustSection && trustCards.length > 0) {
   );
 
   gridsObserver.observe(trustSection);
+}
+
+const portfolioRevealItems = document.querySelectorAll(
+  ".portfolio .portfolio-heading, .portfolio .portfolio-subheading, .portfolio .video-production, .portfolio .web-development"
+);
+
+portfolioRevealItems.forEach((item, index) => {
+  item.style.setProperty("--reveal-delay", `${index * 130}ms`);
+});
+
+if (portfolioRevealItems.length > 0) {
+  const portfolioObserver = new IntersectionObserver(
+    (entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  portfolioRevealItems.forEach((item) => {
+    portfolioObserver.observe(item);
+  });
 }
 
 document.addEventListener("visibilitychange", () => {
