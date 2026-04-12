@@ -11,7 +11,8 @@
   <!-- nav bar -->
   <div class="nav-bar">
       <div class="logo">
-          <img src="../../images/landing-page-pictures/nav-bar-logo.svg" alt="">
+        <img class="nav-logo nav-logo-white" src="../../images/landing-page-pictures/nav-bar-logo.svg" alt="Vynxx logo">
+        <img class="nav-logo nav-logo-black" src="../../images/landing-page-pictures/nav-bar-logo-black.svg" alt="Vynxx logo">
       </div>
       <div class="nav-links">
           <a href="#">Services</a>
@@ -103,6 +104,20 @@
         <p class = "web-development-header">Web development</p>
         <p class = "web-development-subheader">Modern and responsive websites built to deliver smooth user experiences, reflect your brand identity, and support your business growth with reliable performance</p>
       </a>
+    </div>
+  </div>
+
+  <!-- agencies trusted -->
+  <div class="all-agencies-trusted">
+    <div class="agencies-trusted">
+      <div class="text">
+        <p class = "small-trusted-text">Trusted by</p>
+        <p class = "big-trusted-text">100+ clients</p>
+      </div>
+      <div class="line"></div>
+      <img src="../../images/landing-page-pictures/artex logo.svg" alt="" class = "artex-logo">
+      <img src="../../images/landing-page-pictures/brainer x.svg" alt="" class = "brainer-x-logo">
+      <img src="../../images/landing-page-pictures/az voyage.svg" alt="" class = "az-voyage-logo">
     </div>
   </div>
 
@@ -225,6 +240,9 @@ if (heroSection) {
 
 const trustSection = document.querySelector(".trust-grids");
 const trustCards = document.querySelectorAll(".trust-grids .grid");
+const portfolioSection = document.querySelector(".portfolio");
+const navBar = document.querySelector(".nav-bar");
+const navLogo = document.querySelector(".logo");
 
 trustCards.forEach((card, index) => {
   card.style.setProperty("--reveal-delay", `${index * 130}ms`);
@@ -246,6 +264,22 @@ if (trustSection && trustCards.length > 0) {
   );
 
   gridsObserver.observe(trustSection);
+}
+
+if (portfolioSection && navBar && navLogo) {
+  const updateNavLogoTheme = () => {
+    const portfolioRect = portfolioSection.getBoundingClientRect();
+    const logoRect = navLogo.getBoundingClientRect();
+    const logoTriggerY = logoRect.top + logoRect.height / 2;
+    const useDarkLogo =
+      portfolioRect.top <= logoTriggerY && portfolioRect.bottom > logoTriggerY;
+
+    navBar.classList.toggle("use-dark-logo", useDarkLogo);
+  };
+
+  updateNavLogoTheme();
+  window.addEventListener("scroll", updateNavLogoTheme, { passive: true });
+  window.addEventListener("resize", updateNavLogoTheme);
 }
 
 const portfolioRevealItems = document.querySelectorAll(
