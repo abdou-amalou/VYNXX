@@ -372,6 +372,7 @@ if (heroSection) {
 
 const trustSection = document.querySelector(".trust-grids");
 const trustCards = document.querySelectorAll(".trust-grids .grid");
+const serviceCards = document.querySelectorAll(".services .service");
 const portfolioSection = document.querySelector(".portfolio");
 const navBar = document.querySelector(".nav-bar");
 const navLogo = document.querySelector(".logo");
@@ -396,6 +397,30 @@ if (trustSection && trustCards.length > 0) {
   );
 
   gridsObserver.observe(trustSection);
+}
+
+serviceCards.forEach((card, index) => {
+  card.style.setProperty("--reveal-delay", `${index * 130}ms`);
+});
+
+if (serviceCards.length > 0) {
+  const servicesObserver = new IntersectionObserver(
+    (entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.16 }
+  );
+
+  serviceCards.forEach((card) => {
+    servicesObserver.observe(card);
+  });
 }
 
 if (portfolioSection && navBar && navLogo) {

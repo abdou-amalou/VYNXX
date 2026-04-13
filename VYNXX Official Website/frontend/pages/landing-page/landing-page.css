@@ -541,17 +541,37 @@ body{
 }
 .services {
     display : grid;
-    grid-template-columns: 29% 29% 29%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     gap : 50px;
     color : white;
     align-items: center;
     justify-content: center;
+    transition: grid-template-columns 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), grid-template-rows 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.services:has(.service:nth-child(3n+1):hover){
+    grid-template-columns: 1.04fr 0.98fr 0.98fr;
+}
+.services:has(.service:nth-child(3n+2):hover){
+    grid-template-columns: 0.98fr 1.04fr 0.98fr;
+}
+.services:has(.service:nth-child(3n):hover){
+    grid-template-columns: 0.98fr 0.98fr 1.04fr;
+}
+.services:has(.service:nth-child(-n+3):hover){
+    grid-template-rows: 1.04fr 0.98fr 0.98fr;
+}
+.services:has(.service:nth-child(n+4):nth-child(-n+6):hover){
+    grid-template-rows: 0.98fr 1.04fr 0.98fr;
+}
+.services:has(.service:nth-child(n+7):hover){
+    grid-template-rows: 0.98fr 0.98fr 1.04fr;
 }
 .service {
     display: flex;
     flex-direction: column;
     background-color :#FF410D;
-    gap : 300px;
+    gap : 220px;
     padding : 70px 20px;
     margin: 0;
     width: 100%;
@@ -559,20 +579,41 @@ body{
     border-radius : 40px;
     position: relative;
     overflow: hidden;
-    transition: background-color 0.55s ease, padding 0.55s ease, width 0.55s ease, height 0.55s ease, transform 0.55s ease;
+    transform: scale(1);
+    translate: 0 28px;
+    opacity: 0;
+    filter: blur(10px);
+    transform-origin: center center;
+    will-change: opacity, filter, translate, transform;
+    transition:
+        opacity 1000ms ease,
+        filter 1000ms ease,
+        translate 1000ms ease,
+        transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+        background-color 0.7s ease,
+        padding 0.7s ease,
+        width 0.7s ease,
+        height 0.7s ease,
+        margin 0.7s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+}
+.service.is-visible{
+    opacity: 1;
+    filter: blur(0px);
+    translate: 0 0;
 }
 .service-number{
     font-size : 1000%;
     letter-spacing : -2px;
     font-weight : 600;
     opacity : 55%;
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .service-name{
     display: flex;
     align-items: center;
     gap : 10px;
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 .service-name p{
     font-size : 130%;
@@ -589,12 +630,13 @@ body{
     opacity: 0;
     transform: translateY(16px);
     pointer-events: none;
-    transition: opacity 0.55s ease, transform 0.55s ease;
+    transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .top-image{
     width : 100%;
     border-radius: 20px;
+    opacity :85%;
 }
 .description{
     font-weight : 400;
@@ -612,9 +654,10 @@ body{
 .service:hover{
     background-color: #F96F49;
     padding: 20px 20px 70px 20px;
-    width: 110%;
-    height: 110%;
-    transform: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    transform: scale(1.005);
     cursor: pointer;
 }
 .service:hover .service-number,
@@ -625,6 +668,11 @@ body{
 .service:hover .service-hover-layout{
     opacity: 1;
     transform: translateY(0);
+}
+.ser-title {
+    font-size : 190%;
+    font-weight : 600;
+    letter-spacing : -1px;
 }
 @media (max-width : 1060px){
     .sub-header{
