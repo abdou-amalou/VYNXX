@@ -112,7 +112,7 @@
     <div class="agencies-trusted">
       <div class="text">
         <p class = "small-trusted-text">Trusted by</p>
-        <p class = "big-trusted-text">100+ clients</p>
+        <p class = "big-trusted-text"><span class="client-count" data-target="100">100</span>+ clients</p>
       </div>
       <div class="line"></div>
       <img src="../../images/landing-page-pictures/artex logo.svg" alt="" class = "artex-logo">
@@ -253,6 +253,72 @@
     </div>
   </div>
 
+
+  <!-- clients reviews -->
+
+  <div class="clients-reviews">
+    <div class="reviews-upper-part">
+      <p class = "heading">Truested by our clients</p>
+      <p class = "subheading">Real feedback from clients who trusted Vynxx to bring their ideas to life, improve their brand presence, and deliver results that truly made a difference for their business.</p>
+    </div>
+    <div class="reviews-grids">
+      <div class="review" id = "gray">
+        <div class="upper">
+          <div class="review-pin">
+            <img src="../../images/landing-page-pictures/review pin.svg" alt="">
+          </div>
+          <p>Client Review</p>
+        </div>
+        <img src="../../images/landing-page-pictures/gray review.svg" alt="">
+      </div>
+      <div class="review" id = "skin">
+        <div class="upper">
+          <div class="review-pin">
+            <img src="../../images/landing-page-pictures/review pin.svg" alt="">
+          </div>
+          <p>Client Review</p>
+        </div>
+        <img src="../../images/landing-page-pictures/skin review.svg" alt="">
+      </div>
+      <div class="review" id = "blue">
+        <div class="upper">
+          <div class="review-pin">
+            <img src="../../images/landing-page-pictures/review pin.svg" alt="">
+          </div>
+          <p>Client Review</p>
+        </div>
+        <img src="../../images/landing-page-pictures/blue review.svg" alt="">
+      </div>
+      <div class="review" id = "orange">
+        <div class="upper">
+          <div class="review-pin">
+            <img src="../../images/landing-page-pictures/review pin.svg" alt="">
+          </div>
+          <p>Client Review</p>
+        </div>
+        <img src="../../images/landing-page-pictures/orange review.svg" alt="">
+      </div>
+      <div class="review" id = "red">
+        <div class="upper">
+          <div class="review-pin">
+            <img src="../../images/landing-page-pictures/review pin.svg" alt="">
+          </div>
+          <p>Client Review</p>
+        </div>
+        <img src="../../images/landing-page-pictures/red review.svg" alt="">
+      </div>
+      <div class="review" id = "yellow">
+        <div class="upper">
+          <div class="review-pin">
+            <img src="../../images/landing-page-pictures/review pin.svg" alt="">
+          </div>
+          <p>Client Review</p>
+        </div>
+        <img src="../../images/landing-page-pictures/yellow review.svg" alt="">
+      </div>
+      
+    </div>
+  </div>
 <script>
 const canvas = document.getElementById("wave-canvas");
 const heroSection = document.querySelector(".hero-section");
@@ -373,9 +439,77 @@ if (heroSection) {
 const trustSection = document.querySelector(".trust-grids");
 const trustCards = document.querySelectorAll(".trust-grids .grid");
 const serviceCards = document.querySelectorAll(".services .service");
+const reviewCards = document.querySelectorAll(".reviews-grids .review");
 const portfolioSection = document.querySelector(".portfolio");
+const clientsReviewsSection = document.querySelector(".clients-reviews");
 const navBar = document.querySelector(".nav-bar");
 const navLogo = document.querySelector(".logo");
+const clientCount = document.querySelector(".client-count");
+
+function animateCountUp(element, start, end, duration) {
+  let animationStart = null;
+
+  const tick = (timestamp) => {
+    if (!animationStart) {
+      animationStart = timestamp;
+    }
+
+    const progress = Math.min((timestamp - animationStart) / duration, 1);
+    const easedProgress = 1 - Math.pow(1 - progress, 3);
+    const value = Math.floor(start + (end - start) * easedProgress);
+
+    element.textContent = String(value);
+
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+      return;
+    }
+
+    element.textContent = String(end);
+  };
+
+  requestAnimationFrame(tick);
+}
+
+if (clientCount) {
+  const countTarget = Number(clientCount.dataset.target) || 100;
+  const countStart = 2;
+  const countSection = document.querySelector(".all-agencies-trusted") || clientCount;
+  let countAnimated = false;
+
+  clientCount.textContent = String(countStart);
+
+  const triggerCountAnimation = () => {
+    if (countAnimated) {
+      return;
+    }
+
+    countAnimated = true;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      clientCount.textContent = String(countTarget);
+      return;
+    }
+
+    animateCountUp(clientCount, countStart, countTarget, 1400);
+  };
+
+  const countObserver = new IntersectionObserver(
+    (entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        triggerCountAnimation();
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  countObserver.observe(countSection);
+}
 
 trustCards.forEach((card, index) => {
   card.style.setProperty("--reveal-delay", `${index * 130}ms`);
@@ -423,13 +557,39 @@ if (serviceCards.length > 0) {
   });
 }
 
-if (portfolioSection && navBar && navLogo) {
+reviewCards.forEach((card, index) => {
+  card.style.setProperty("--reveal-delay", `${index * 130}ms`);
+});
+
+if (reviewCards.length > 0) {
+  const reviewsObserver = new IntersectionObserver(
+    (entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.16 }
+  );
+
+  reviewCards.forEach((card) => {
+    reviewsObserver.observe(card);
+  });
+}
+
+if (navBar && navLogo) {
   const updateNavLogoTheme = () => {
-    const portfolioRect = portfolioSection.getBoundingClientRect();
     const logoRect = navLogo.getBoundingClientRect();
     const logoTriggerY = logoRect.top + logoRect.height / 2;
-    const useDarkLogo =
-      portfolioRect.top <= logoTriggerY && portfolioRect.bottom > logoTriggerY;
+    const darkLogoSections = [portfolioSection, clientsReviewsSection].filter(Boolean);
+    const useDarkLogo = darkLogoSections.some((section) => {
+      const sectionRect = section.getBoundingClientRect();
+      return sectionRect.top <= logoTriggerY && sectionRect.bottom > logoTriggerY;
+    });
 
     navBar.classList.toggle("use-dark-logo", useDarkLogo);
   };
