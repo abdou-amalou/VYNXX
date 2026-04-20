@@ -219,6 +219,7 @@ body{
     width :100%;
     justify-content: center;
     gap : 70px;
+    transition : all 0.5s;
     cursor: default;
 }
 .block:hover{
