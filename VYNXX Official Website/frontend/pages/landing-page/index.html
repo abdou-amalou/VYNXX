@@ -2,38 +2,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ✅ SEO Title -->
     <title>Vynxx - Creative Agency for Video Production, Design & Web Development</title>
 
-    <!-- ✅ Meta Description -->
     <meta name="description" content="Vynxx is a creative agency specializing in video production, UI/UX design, and web development. We help brands tell their story with modern design and scalable technology.">
 
-    <!-- ✅ Keywords (optional, not as strong today but fine to include) -->
     <meta name="keywords" content="Vynxx, creative agency, video production, UI/UX design, web development, branding, Framer, Webflow">
 
-    <!-- ✅ Open Graph (for social sharing previews) -->
     <meta property="og:title" content="Vynxx - Creative Agency">
     <meta property="og:description" content="Video production, design, and web development for modern brands.">
     <meta property="og:image" content="https://vynxx.com/assets/preview.jpg">
     <meta property="og:url" content="https://vynxx.com">
     <meta property="og:type" content="website">
 
-    <!-- ✅ Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vynxx - Creative Agency">
     <meta name="twitter:description" content="Video production, design, and web development for modern brands.">
     <meta name="twitter:image" content="https://vynxx.com/assets/preview.jpg">
 
-    <!-- ✅ Canonical URL -->
     <link rel="canonical" href="https://vynxx.com">
 
-    <!-- ✅ Stylesheet -->
     <link rel="stylesheet" href="landing-page.css">
 
-    <!-- ✅ Favicon -->
     <link rel="icon" href="../../images/landing-page-pictures/vynxx logo for favicon.svg" type="image/svg+xml">
 
-    <!-- ✅ Schema Markup (Organization) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -148,6 +139,29 @@
         <p class = "web-development-header">Web development</p>
         <p class = "web-development-subheader">Modern and responsive websites built to deliver smooth user experiences, reflect your brand identity, and support your business growth with reliable performance</p>
       </a>
+    </div>
+  </div>
+
+
+  <!-- About Vynxx -->
+  <div class="about-us">
+    <p class = "about-heading">About Vynxx</p>
+    <p class = "about-subheading">A creative agency focused on building strong visuals and modern digital experiences that help brands stand out, connect with their audience, and grow with confidence</p>
+    <div class="about-blocks">
+      <div class="block" id = "left">
+        <p class = "block-heading">Built with purpose</p>
+        <p class = "block-paragraph">Vynxx was created to help brands move beyond average and build a strong presence through high-quality content and digital experiences. By combining creativity, strategy, and technical execution, every project is designed with clear direction, attention to detail, and a focus on real results</p>
+      </div>
+      <div class="right">
+        <div class="block">
+          <p class = "block-heading">Creative and technical approach</p>
+          <p class = "block-paragraph">Every project blends creative thinking with technical precision, ensuring that visuals, design, and development work together to deliver a smooth and impactful final result</p>
+        </div>
+        <div class="block">
+          <p class = "block-heading">Focused on real results</p>
+          <p class = "block-paragraph">The goal is not just to create something that looks good, but to build work that performs, connects with people, and helps brands grow over time</p>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -363,6 +377,41 @@
       
     </div>
   </div>
+
+  <!-- quote transition -->
+
+
+  <div class="quote-transition">
+    <p class = "big-quote">Before anything looks good, it has to mean something</p>
+    <p class = "small-quote">The difference is in how a brand looks, how it connects with people, and how it stays in their minds. Every detail works together to create something people don’t just notice, but remember</p>
+  </div>
+
+  <!-- CTA -->
+
+  <div class="cta">
+    <div class="upper-texts">
+      <p class ="cta-header">Let's build something that makes a <span>differene</span></p>
+      <p class = "cta-subheader">Choose the way that fits you best and take the first step toward building something that helps your brand grow and stand out</p>
+    </div>
+    <div class="cta-cards">
+      <div class="card" id = "black-card">
+        <p class = "card-heading">Start Your Project</p>
+        <p class = "card-paragraph">Turn your ideas into real results with a team focused on quality, creativity, and delivering work that makes your brand stand out</p>
+      </div>
+      <div class="card" id = "gray-card">
+        <p class = "card-heading">Get your project details</p>
+        <p class = "card-paragraph">Get clear information about pricing, timelines, and how your project will be built, so you can move forward with confidence and no confusion</p>
+      </div>
+      <div class="card" id = "white-card">
+        <p class = "card-heading">Get Your Project Details</p>
+        <p class = "card-paragraph">Get clear information about pricing, timelines, and how your project will be built, so you can move forward with confidence and no confusion</p>
+      </div>
+      <div class="card" id = "red-card">
+        <p class = "card-heading">Let's talk about your idea</p>
+        <p class = "card-paragraph">Get clear information about pricing, timelines, and how your project will be built, so you can move forward with confidence and no confusion</p>
+      </div>
+    </div>
+  </div>
 <script>
 const canvas = document.getElementById("wave-canvas");
 const heroSection = document.querySelector(".hero-section");
@@ -489,6 +538,67 @@ const clientsReviewsSection = document.querySelector(".clients-reviews");
 const navBar = document.querySelector(".nav-bar");
 const navLogo = document.querySelector(".logo");
 const clientCount = document.querySelector(".client-count");
+const smallTrustedText = document.querySelector(".small-trusted-text");
+const bigQuote = document.querySelector(".big-quote");
+const smallQuote = document.querySelector(".small-quote");
+const ctaCardsContainer = document.querySelector(".cta-cards");
+const ctaCards = document.querySelectorAll(".cta-cards .card");
+
+if (ctaCardsContainer && ctaCards.length > 0) {
+  ctaCards.forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      if (card.id) {
+        ctaCardsContainer.dataset.hovered = card.id;
+      }
+    });
+
+    card.addEventListener("mouseleave", () => {
+      delete ctaCardsContainer.dataset.hovered;
+    });
+  });
+
+  ctaCardsContainer.addEventListener("mouseleave", () => {
+    delete ctaCardsContainer.dataset.hovered;
+  });
+}
+
+function setupQuoteReveal(quoteElement) {
+  if (!quoteElement) {
+    return;
+  }
+
+  const quoteText = quoteElement.textContent || "";
+
+  quoteElement.setAttribute("aria-label", quoteText.trim());
+  quoteElement.textContent = "";
+
+  Array.from(quoteText).forEach((character, index) => {
+    const charSpan = document.createElement("span");
+    charSpan.className = "quote-char";
+    charSpan.style.setProperty("--char-index", String(index));
+    charSpan.textContent = character === " " ? "\u00A0" : character;
+    quoteElement.appendChild(charSpan);
+  });
+
+  const quoteObserver = new IntersectionObserver(
+    (entries, revealObserver) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  quoteObserver.observe(quoteElement);
+}
+
+setupQuoteReveal(bigQuote);
+setupQuoteReveal(smallQuote);
 
 function animateCountUp(element, start, end, duration) {
   let animationStart = null;
@@ -518,7 +628,7 @@ function animateCountUp(element, start, end, duration) {
 if (clientCount) {
   const countTarget = Number(clientCount.dataset.target) || 100;
   const countStart = 2;
-  const countSection = document.querySelector(".all-agencies-trusted") || clientCount;
+  const countSection = smallTrustedText || clientCount;
   let countAnimated = false;
 
   clientCount.textContent = String(countStart);
@@ -549,7 +659,7 @@ if (clientCount) {
         revealObserver.unobserve(entry.target);
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.7 }
   );
 
   countObserver.observe(countSection);
